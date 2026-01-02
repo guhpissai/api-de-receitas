@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Net;
 
 namespace recipes_api.Controllers;
 
@@ -44,8 +45,7 @@ public class RecipesController : ControllerBase
     public IActionResult Create([FromBody] Recipe recipe)
     {
         _service.AddRecipe(recipe);
-
-        return CreatedAtAction("GetRecipe", new { name = recipe.Name }, recipe);
+        return StatusCode(201, recipe);
     }
 
     // 4 - Sua aplicação deve ter o endpoint PUT /recipe
